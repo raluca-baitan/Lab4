@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fibonacci calculator</title>
+<style>
+  body { font-family: Arial, sans-serif; background: #f4f6f7; color: #1e2b33; margin: 0; padding: 40px 16px; }
+  .box { max-width: 420px; margin: 0 auto; background: #fff; border: 1px solid #d7e3e6; border-radius: 8px; padding: 24px; }
+  h1 { font-size: 22px; margin: 0 0 16px; color: #12343b; }
+  label { display: block; margin-bottom: 6px; }
+  input { font-size: 18px; padding: 8px; width: 140px; border: 1px solid #aab; border-radius: 4px; }
+  button { font-size: 18px; padding: 8px 18px; margin-left: 8px; background: #12343b; color: #fff; border: 0; border-radius: 4px; cursor: pointer; }
+  #out { margin-top: 20px; font-size: 20px; word-break: break-all; }
+  .error { color: #c00000; }
+</style>
+</head>
+<body>
+<div class="box">
+  <h1>Fibonacci calculator</h1>
+  <form id="form">
+    <label for="n">Enter n (whole number from 0 to 10000):</label>
+    <input id="n" type="number" min="0" max="10000" step="1" placeholder="n">
+    <button type="submit">Calculate</button>
+  </form>
+  <div id="out"></div>
+</div>
+<script>
+  "use strict";
+  const MAX_N = 10000;
+
+  // F(0) = 0, F(1) = 1, F(n) = F(n-1) + F(n-2)
+  // BigInt keeps every digit exact, no overflow.
+  function fib(n) {
+    let a = 0n, b = 1n;
+    for (let i = 0; i < n; i++) {
+      const t = a + b;
+      a = b;
+      b = t;
+    }
+    return a;
+  }
+
+  // Returns the number n, or an error message (string).
+  function readN(text) {
+    text = text.trim();
+    if (text === "") return "Please enter a value for n.";
+    if (!/^-?\d+$/.test(text)) return "n must be a whole number (no letters, no decimals).";
+    const n = Number(text);
+    if (n < 0) return "n must be 0 or greater.";
+    if (n > MAX_N) return "n must be at most " + MAX_N + ".";
+    return n;
+  }
+
+  function show(text, isError) {
+    const out = document.getElementById("out");
+    out.textContent = text;
+    out.className = isError ? "error" : "";
+  }
+
+  document.getElementById("form").addEventListener("submit", function (e) {
+    e.preventDefault(); // Enter key and button both work
+    const n = readN(document.getElementById("n").value);
+    if (typeof n === "string") {
+      show(n, true);
+    } else {
+      show("F(" + n + ") = " + fib(n).toString(), false);
+    }
+  });
+</script>
+</body>
+</html>
