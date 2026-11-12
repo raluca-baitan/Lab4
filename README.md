@@ -111,4 +111,4 @@ Defect density = defects / lines of code.
 - [ ] 2 issues and 1 milestone created
 
 <!-- CONFLICT LINE: both people edit the next line on different branches -->
-Team: Name A, Name B
+Team: raluca-baitan, teodora-stergarel

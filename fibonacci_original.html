@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fibonacci calculator</title>
+<style>
+  body { font-family: Arial, sans-serif; background: #f4f6f7; color: #1e2b33; margin: 0; padding: 40px 16px; }
+  .box { max-width: 420px; margin: 0 auto; background: #fff; border: 1px solid #d7e3e6; border-radius: 8px; padding: 24px; }
+  h1 { font-size: 22px; margin: 0 0 16px; color: #12343b; }
+  input { font-size: 18px; padding: 8px; width: 140px; border: 1px solid #aab; border-radius: 4px; }
+  button { font-size: 18px; padding: 8px 18px; margin-left: 8px; background: #12343b; color: #fff; border: 0; border-radius: 4px; cursor: pointer; }
+  #out { margin-top: 20px; font-size: 20px; word-break: break-all; }
+</style>
+</head>
+<body>
+<div class="box">
+  <h1>Fibonacci calculator</h1>
+  <input id="n" placeholder="n">
+  <button onclick="calculate()">Calculate</button>
+  <div id="out"></div>
+</div>
+<script>
+  // Fibonacci calculator, version 1.0
+  function fib(n) {
+    if (n == 0) return 1;
+    var a = 0, b = 1;
+    for (var i = 0; i < n; i++) {
+      var t = (a + b) | 0;   // keep the numbers as integers
+      a = b;
+      b = t;
+    }
+    return a;
+  }
+
+  function calculate() {
+    var n = parseInt(document.getElementById("n").value);
+    document.getElementById("out").textContent = "F(" + n + ") = " + fib(n);
+  }
+</script>
+</body>
+</html>
