@@ -20,17 +20,17 @@ Correct values: F(0) = 0, F(1) = 1, F(n) = F(n-1) + F(n-2).
 
 | Input | Program shows | Correct F(n) | OK? | What is wrong |
 |---|---|---|---|---|
-| 0 | F(0) = 1 | 0 | ❌ | `if (n == 0) return 1` is wrong |
-| 1 | F(1) = 1 | 1 | ✅ | |
-| 15 | F(15) = 610 | 610 | ✅ | |
-| 23 | F(23) = 28657 | 28657 | ✅ | |
-| 50 | F(50) = -298632863 | 12586269025 | ❌ | `\| 0` forces 32-bit integers → overflow from n = 47 |
-| 98 | F(98) = -90618175 | 135301852344706746049 | ❌ | Overflow; normal JS numbers are also not exact after F(78) |
-| -5 | F(-5) = 0 | error expected | ❌ | Negative n accepted, no message |
-| 2.5 | F(2) = 1 | error expected | ❌ | `parseInt` cuts 2.5 to 2 silently |
-| abc | F(NaN) = 0 | error expected | ❌ | No input validation |
-| 12abc | F(12) = 144 | error expected | ❌ | `parseInt` accepts "12abc" as 12 |
-| (empty) | F(NaN) = 0 | error expected | ❌ | Empty input not checked |
+| 0 | F(0) = 1 | 0 | no | `if (n == 0) return 1` is wrong |
+| 1 | F(1) = 1 | 1 | yes | |
+| 15 | F(15) = 610 | 610 | yes | |
+| 23 | F(23) = 28657 | 28657 | yes | |
+| 50 | F(50) = -298632863 | 12586269025 | no | `\| 0` forces 32-bit integers → overflow from n = 47 |
+| 98 | F(98) = -90618175 | 135301852344706746049 | no | Overflow; normal JS numbers are also not exact after F(78) |
+| -5 | F(-5) = 0 | error expected | no | Negative n accepted, no message |
+| 2.5 | F(2) = 1 | error expected | no | `parseInt` cuts 2.5 to 2 silently |
+| abc | F(NaN) = 0 | error expected | no | No input validation |
+| 12abc | F(12) = 144 | error expected | no | `parseInt` accepts "12abc" as 12 |
+| (empty) | F(NaN) = 0 | error expected | no | Empty input not checked |
 
 **Correctness:** only 3 of 11 tests pass. **Performance:** fast (simple loop), but large n gives wrong results. **Ease of use:** no label explaining n, Enter key does nothing, no error messages. **Source code:** misleading comment ("keep the numbers as integers"), `var` and loose `==`, labelled "version 1.0" although it is not ready. **User expectations:** the user expects either a correct number or a clear error, never a negative Fibonacci number or "NaN".
 
@@ -110,5 +110,5 @@ Defect density = defects / lines of code.
 - [ ] Conflict created (same line edited on two branches) and resolved
 - [ ] 2 issues and 1 milestone created
 
-<!-- CONFLICT LINE: both people edit the next line on different branches -->
-Team: Name A, Name B
+
+Team: raluca-baitan, teodora-stergarel
